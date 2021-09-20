@@ -1,0 +1,158 @@
+Queries for creating table:
+create table actor
+(
+act_id int,
+act_name varchar(10),
+act_gender varchar(5),
+primary key(act_id)
+);
+create table director
+(
+dir_id int,
+dir_name varchar(20),
+dir_phone int,
+primary key(dir_id)
+);
+create table movies(
+mov_id int,
+mov_title varchar(10),
+mov_year int,
+mov_lang varchar(10),
+dir_id int,
+primary key(mov_id),
+foreign key(dir_id) references director(dir_id)
+);
+create table moviecast(
+act_id int,
+mov_id int,
+role varchar(10),
+primary key(act_id,mov_id),
+foreign key(act_id) references actor(act_id), foreign
+key(mov_id) references movies(mov_id)
+);
+create table rating(
+mov_id int,
+rev_stars int,
+primary key(mov_id),
+foreign key(mov_id) references movies(mov_id)
+);
+Queries for displaying schema of the table:
+desc actor;
+desc director;
+desc moviecast;
+desc rating;
+Page 31
+Name                 Null?        Type
+------------------- ----------- --------------------
+ACT_ID           NOT NULL       NUMBER(38)
+ACT_NAME                        VARCHAR2(10)
+ACT_GENDER                      VARCHAR2(5)
+Name
+-------------
+DIR_ID
+DIR_NAME
+DIR_PHONE
+Null?
+--------
+NOT NULL
+Type
+------------------
+NUMBER(38)
+VARCHAR2(20)
+NUMBER(38)
+desc movies;
+Name
+-------------
+MOV_ID
+MOV_TITLE
+MOV_YEAR
+MOV_LANG
+DIR_ID
+Null?
+-------- NOT
+NULL
+Type
+-------------------
+NUMBER(38)
+VARCHAR2(10)
+NUMBER(38)
+VARCHAR2(10)
+NUMBER(38)
+Name            Null?     Type
+-------------- -------- ------------------
+ACT_ID NOT NULL          NUMBER(38)
+MOV_ID NOT NULL          NUMBER(38)
+ROLE                      VARCHAR2(10)
+Name             Null? Type
+-------------- -------- ---------------
+MOV_ID            NOT NULL NUMBER(38)
+REV_STARS                  NUMBER(38)
+Queries for inserting table:
+insert into actor values('301','Anushka','F');
+insert into actor values('302','Prabhas','M');
+insert into actor values('303','Punith','M');
+insert into actor values('304','Jermy','M');
+insert into actor values('305','yash','M');
+insert into director values('70','Hitchcock','9487563255');
+insert into director values('71','Rajamouli','8948562346');
+insert into director values('72','steven spielberg','9823654125');
+insert into director values('73','Faran','9786542356');
+insert into director values('74','Martin','8974563214');
+insert into movies values('1001','Bahubali-2','2017','telugu','70');
+insert into movies values('1002','Singham','2008','hindi','71');
+insert into movies values('1003','Golmaal-2','2011','telugu','72');
+insert into movies values('1004','Allthebest','2015','hindi','73');
+insert into movies values('1005','Akash','2009','kannada','74');
+insert into moviecast values('301','1001','Heroine');
+insert into moviecast values('302','1002','Hero');
+insert into moviecast values('303','1003','Guest');
+insert into moviecast values('304','1004','Hero');
+insert into moviecast values('305','1005','Heroine');
+insert into rating values('1001','4');
+insert into rating values('1002','2');
+insert into rating values('1003','5');
+insert into rating values('1004','3');
+insert into rating values('1005','4');
+Queries to display table:
+select *from actor;
+Page 32
+ACT_ID      ACT_NAME              ACT_GENDER
+----------- --------------- -------------------
+301         Anushka                   F
+302         Prabhas                   M
+303         Punith                    M
+304         Jermy                     M
+305         Yash                      M
+select *from director;
+select *from movies;
+select *from moviecast;
+Page 33
+DIR_ID     DIR_NAME          DIR_PHONE
+--------- ----------------- ------------------
+70        Hitchcock         9487563255
+71        Rajamouli         8948562346
+72        stevenspielberg   9823654125
+73        Faran             9786542356
+74        Martin            8974563214
+MOV_ID        MOV_TITLE        MOV_YEAR          MOV_LANG           DIR_ID
+---------- ------------------ ------------------ ------------------ ----------
+1001         Bahubali-2        2017            Telugu              70
+1002         Singham           2008            Hindi               71
+1003         Golmaal-2         2011            Telugu              72
+1005         Akash             2009            Kannada             74
+1004         Allthebest        2015            Hindi               73
+ACT_ID        MOV_ID        ROLE
+------------ ------------- ----------
+301          1001          Heroine
+302          1002          Hero
+303          1003          Guest
+304          1004          Hero
+305          1005          Heroine
+select *from rating;
+MOV_ID        REV_STARS
+------------ -----------------
+1001           4
+1002           2
+1003           5
+1004           3
+1005           4
